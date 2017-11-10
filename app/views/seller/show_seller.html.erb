@@ -1,0 +1,22 @@
+<div class="row">
+  <% if @user.empty? %>
+      <p>No User found in database</p>
+  <% else %>
+      <ul>
+        <% @user.each do |user| %>
+            <li>
+              <div class="row">
+                <p><%= user.email %></p>
+              </div>
+              <div class="row">
+
+                <button id="make_seller<%=user.id%>" onclick="make_seller_fun(<%=user.id%>)">Make seller</button>
+                <input type="hidden" id="make_url<%=user.id%>" value="<%= make_seller_path(:user_id => user.id) %>">
+                <div id="make_message<%=user.id%>" style="color:green"></div>
+              </div>
+            </li>
+            <hr>
+        <% end %>
+      </ul>
+  <% end %>
+</div>

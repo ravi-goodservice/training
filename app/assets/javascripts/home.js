@@ -1,6 +1,7 @@
 var ready = function() {
 
     $(document).ready(function(){
+
         $(".dropdown").hover(
             function() {
                 $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true,true).slideDown("400");
@@ -28,7 +29,6 @@ var ready = function() {
     });
     $('#Add_to_cart').click(function (event) {
 
-        var prod_id = $('#prod_id').val()
         var ad_to_cart_url = $('#add_to_cart_url').val()
         $.ajax({
             type: "GET",
@@ -40,6 +40,23 @@ var ready = function() {
         });
 
     });
+
 }
 
 $(document).on('turbolinks:load', ready);
+
+function make_seller_fun(user_id) {
+
+
+    var make_url_url = $('#make_url'+user_id).val()
+
+    $.ajax({
+        type: "GET",
+        url: make_url_url,
+        dataType: "json",
+        success: function (result) {
+            $('#make_message'+user_id).html(result.message)
+        }
+    });
+
+}

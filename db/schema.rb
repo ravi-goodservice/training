@@ -11,17 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171110072038) do
-
-  create_table "carts", force: :cascade do |t|
-    t.integer  "products_id"
-    t.integer  "sellers_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "carts", ["products_id"], name: "index_carts_on_products_id"
-  add_index "carts", ["sellers_id"], name: "index_carts_on_sellers_id"
+ActiveRecord::Schema.define(version: 20171110115050) do
 
   create_table "ordercarts", force: :cascade do |t|
     t.integer  "users_id"
@@ -40,15 +30,15 @@ ActiveRecord::Schema.define(version: 20171110072038) do
   end
 
   create_table "sellers", force: :cascade do |t|
-    t.string   "name"
-    t.string   "address"
+    t.integer  "users_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_index "sellers", ["users_id"], name: "index_sellers_on_users_id"
+
   create_table "user_carts", force: :cascade do |t|
     t.integer  "products_id"
-    t.integer  "users_id"
     t.integer  "ordercarts_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
@@ -56,7 +46,6 @@ ActiveRecord::Schema.define(version: 20171110072038) do
 
   add_index "user_carts", ["ordercarts_id"], name: "index_user_carts_on_ordercarts_id"
   add_index "user_carts", ["products_id"], name: "index_user_carts_on_products_id"
-  add_index "user_carts", ["users_id"], name: "index_user_carts_on_users_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -71,6 +60,8 @@ ActiveRecord::Schema.define(version: 20171110072038) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "provider"
+    t.string   "uid"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

@@ -19,8 +19,18 @@
 </p>
 
 <input type="hidden" id="add_to_cart_url" value="<%= add_to_cart_path(:product_id => @product.id) %>">
-<button id="Add_to_cart">Add to Cart</button>
 
-<%= link_to 'Delete', @product, method: :delete %> |
+<% if user_signed_in? %>
+    <button id="Add_to_cart">Add to Cart</button>
+    <br>
+    <%= link_to "View cart",view_cart_path , :class => 'navbar-link'  %>
+<% else %>
+    <button>
+    <%= link_to "Please login to add into the cart", new_user_session_path, :class => 'navbar-link'  %>
+    </button>
+<% end %>
+
+<br>
+
 <%= link_to 'Home', products_path %>
 <div id="add_to_cart_message" style="color:green"></div>

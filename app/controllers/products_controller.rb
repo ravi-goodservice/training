@@ -17,15 +17,16 @@ class ProductsController < ApplicationController
 
   # GET /products/new
   def new
-    @product = Product.new
+    if Product.check_seller(current_user)
+      @product = Product.new
+      @new_check =true
+    else
+      @new_check =false
+    end
   end
   def price
-    puts params[:id]
-    product_id = params[:id]
-
     # do something with some_parameter and return the results
     @prod_price=Product.find(params[:id]).price
-    puts @prod_price
     render json: {price:@prod_price.to_json}
   end
   # POST /products

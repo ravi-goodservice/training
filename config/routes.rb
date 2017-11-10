@@ -3,11 +3,16 @@ Rails.application.routes.draw do
   resources :products
 
   root 'products#index'
-  get 'products/price/:id' => 'products#price'
+  get 'products/price/:id' => 'products#price'  # for getting price of product by ajax
 
   devise_for :users
-  get '/add_to_cart/:product_id' => 'user_cart#add_to_cart', :as => 'add_to_cart'
-  get '/view-cart/' => 'ordercart#view_cart'
+  get '/add_to_cart/:product_id' => 'user_cart#add_to_cart', :as => 'add_to_cart'   #add to cart by ajax
+  get '/view-cart/' => 'ordercart#view_cart'    #open cart for user
+  get '/show_sellers/' => 'seller#show_seller'  #show user list for making them as seller
+  get '/make_seller/:user_id' => 'seller#make_seller' , :as => 'make_seller'  # make user as seller by ajax
+  get '/upload-product/' => 'products#new'      #creating product
+  get 'auth/facebook/callback', to: 'sessions#create'  #facebook url
+  get 'auth/failure', to: redirect('/')
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

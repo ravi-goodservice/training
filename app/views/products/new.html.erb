@@ -1,5 +1,10 @@
+
+<% if @new_check %>
 <h3>Add product</h3>
 
 <%= render 'form' %>
 
 <%= link_to 'Home', products_path %>
+<% else %>
+    <h3>You are not a valid user to make new products</h3>
+<% end %>

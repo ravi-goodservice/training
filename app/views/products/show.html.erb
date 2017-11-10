@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+<input type="hidden" id="prod_id" value="<%= @product.id %>">
+<p>
+  <strong>Name:</strong>
+  <%= @product.name %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+<div id="price"></div>
+<p>
+  <button id="button">view_price</button>
+</p>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @product.description %>
+</p>
+
+<input type="hidden" id="add_to_cart_url" value="<%= add_to_cart_path(:product_id => @product.id) %>">
+<button id="Add_to_cart">Add to Cart</button>
+
+<%= link_to 'Delete', @product, method: :delete %> |
+<%= link_to 'Home', products_path %>
+<div id="add_to_cart_message" style="color:green"></div>

@@ -1,0 +1,14 @@
+<div class="row">
+  <% if @cart_item.empty? %>
+      <p>Cart is empty</p>
+  <% else %>
+      <ul>
+        <% @cart_item.each do |cart| %>
+            <%= cart.users_id %>
+            <hr>
+        <% end %>
+      </ul>
+  <% end %>
+
+  <br>
+</div>

@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
     puts auth.to_json
     user.email = "#{auth['uid']}@#{auth['provider']}.com"
     user.password = auth['uid']
-    if User.exists?(user)
+    if user
       user
     else
       user.save!

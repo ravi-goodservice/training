@@ -1,11 +1,13 @@
 class SessionsController < ApplicationController
+  layout 'devise_users'
   def new
   end
   def create
     if request.env['omniauth.auth']
       user = User.create_with_omniauth(request.env['omniauth.auth'])
+      sign_in(:user, user)
       session[:user_id] = user.id
-      redirect_to user_path(user.id)
+      redirect_to '/'
     else
       user = User.find_by_email(params[:email])
       user && user.authenticate(params[:password])
